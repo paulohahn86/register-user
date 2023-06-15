@@ -3,6 +3,7 @@ package com.educandoweb.usercrud.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,5 +29,18 @@ public class UserController {
 		User obj = userService.findById(id);
 		return ResponseEntity.ok().body(obj); // ok returns true successfully completed and body takes as argument my User
 	}
+
+	@PostMapping()
+	public ResponseEntity<User> save(@RequestBody User user){
+		userService.save(user);
+		return ResponseEntity.status(HttpStatus.CREATED).body(user);
+	}
+
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<User> update(@RequestBody User user,@PathVariable Long id){
+		User user1 = userService.update(user,id);
+		return ResponseEntity.ok(user1);
+	}
+
 
 }

@@ -27,4 +27,21 @@ public class UserService {
 		return obj.get();
 	}
 
+	@Transactional
+	public User save(User user) {
+		return userRepository.save(user);
+	}
+
+	@Transactional
+	public User update(User user, Long id) {
+		User userFind = findById(id);
+		userFind.setId(id);
+		userFind.setName(user.getName());
+		userFind.setEmail(user.getEmail());
+		userFind.setPhone(user.getPhone());
+		userFind.setPassword(user.getPassword());
+		return userRepository.save(userFind);
+
+	}
+
 }
