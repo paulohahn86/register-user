@@ -44,4 +44,9 @@ public class UserService {
 
 	}
 
+	public User delete(Long id) {
+		User user = findById(id);
+		userRepository.deleteById(id);
+		return user;
+	}
 }
